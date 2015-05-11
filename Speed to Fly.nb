@@ -1,0 +1,665 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     24695,        656]
+NotebookOptionsPosition[     22826,        585]
+NotebookOutlinePosition[     23170,        600]
+CellTagsIndexPosition[     23127,        597]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Glider Speed to Fly Notebook", "Title",
+ CellChangeTimes->{{3.511694719328125*^9, 3.511694724109375*^9}, {
+  3.51169477196875*^9, 3.5116947820625*^9}}],
+
+Cell["Unit Conventions", "Subsubtitle",
+ CellChangeTimes->{{3.511695146046875*^9, 3.51169514915625*^9}}],
+
+Cell["\<\
+Sink/Lift : Feet per Minute
+Airspeed : Knots\
+\>", "Text",
+ CellChangeTimes->{{3.5116951583125*^9, 3.5116951888125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"VertSpeedToHorzSpeedConv", " ", "=", " ", "101.269"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.511702056578125*^9, 3.511702098921875*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Glider Polar", "Section",
+ CellChangeTimes->{{3.511694734828125*^9, 3.511694740609375*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Enter Glider Data Here", "Subsection",
+ CellChangeTimes->{{3.511702155625*^9, 3.511702164953125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PolarData", " ", "=", " ", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"55", " ", "0.868976"}], ",", 
+       RowBox[{"-", "200"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"90", " ", "0.868976"}], ",", 
+       RowBox[{"-", "450"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"85", " ", "0.868976"}], ",", 
+       RowBox[{"-", "400"}]}], "}"}], ",", " ", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"97.5", " ", "0.868976"}], ",", " ", 
+       RowBox[{"-", "550"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"120", " ", "0.868976"}], ",", " ", 
+       RowBox[{"-", "1000"}]}], "}"}]}], "\[IndentingNewLine]", "}"}]}], ";", 
+  " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"knots", " ", "airspeed"}], ",", " ", 
+     RowBox[{"vertical", " ", "speed", " ", "in", " ", "fpm"}]}], "}"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.51169527646875*^9, 3.511695317203125*^9}, {
+   3.511695365359375*^9, 3.511695418*^9}, {3.5116954601875*^9, 
+   3.5116955364375*^9}, {3.511695771203125*^9, 3.51169579675*^9}, {
+   3.511698511296875*^9, 3.511698534765625*^9}, {3.511698948703125*^9, 
+   3.51169904078125*^9}, {3.51169924175*^9, 3.511699248140625*^9}, {
+   3.5116992985625*^9, 3.51169929878125*^9}, {3.511699414*^9, 
+   3.511699414765625*^9}, 3.51170124040625*^9, {3.51170167925*^9, 
+   3.511701680578125*^9}, {3.511701911515625*^9, 3.511701950375*^9}, {
+   3.511702116375*^9, 3.5117021206875*^9}, {3.511702271625*^9, 
+   3.51170227996875*^9}, {3.5134271719375*^9, 3.513427245078125*^9}, {
+   3.513427304078125*^9, 3.513427401734375*^9}, {3.5134275604375*^9, 
+   3.513427584359375*^9}, {3.513427738921875*^9, 3.51342774625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Calculate Polar", "Subsection",
+ CellChangeTimes->{{3.511702155625*^9, 3.511702164953125*^9}, {
+  3.5117022145625*^9, 3.511702222375*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"PolarExpression", " ", "=", " ", 
+   RowBox[{"Fit", "[", 
+    RowBox[{"PolarData", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "x", ",", 
+       RowBox[{"x", "^", "2"}]}], "}"}], ",", "x"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PolarFunction", "[", "y_", "]"}], " ", ":=", "  ", 
+  RowBox[{"PolarExpression", " ", "/.", 
+   RowBox[{"x", "\[Rule]", "y"}]}]}]}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Glider Data", "Subsection",
+ CellChangeTimes->{{3.511702155625*^9, 3.511702164953125*^9}, {
+  3.5117022145625*^9, 3.51170224696875*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MinSinkSpeed", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"D", "[", 
+       RowBox[{
+        RowBox[{"PolarFunction", "[", "x", "]"}], ",", "x"}], "]"}], 
+      "\[Equal]", "0"}], ",", "x"}], "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "1", ",", "2"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.511695950484375*^9, 3.51169599696875*^9}, {
+  3.511696041546875*^9, 3.5116960433125*^9}, {3.511696123671875*^9, 
+  3.511696143953125*^9}, {3.511696207234375*^9, 3.5116962479375*^9}, {
+  3.5116991005625*^9, 3.511699100921875*^9}, {3.5117041974375*^9, 
+  3.51170420121875*^9}}],
+
+Cell[BoxData["44.77803967113883`"], "Output",
+ CellChangeTimes->{{3.5116962239375*^9, 3.5116962486875*^9}, 
+   3.511699102875*^9, 3.511699168203125*^9, 3.51169926359375*^9, 
+   3.511699302796875*^9, 3.51169941809375*^9, 3.5117016889375*^9, {
+   3.511701930265625*^9, 3.51170195378125*^9}, 3.511702151703125*^9, 
+   3.5117023698125*^9, {3.5134273903125*^9, 3.513427408515625*^9}, 
+   3.513427600140625*^9, 3.51342775134375*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MinSinkRate", " ", "=", " ", 
+  RowBox[{"PolarFunction", "[", "MinSinkSpeed", "]"}]}]], "Input",
+ CellChangeTimes->{{3.51169854575*^9, 3.5116985811875*^9}, {
+  3.5116986933125*^9, 3.511698724953125*^9}, {3.511699107484375*^9, 
+  3.511699120421875*^9}, {3.51169916346875*^9, 3.51169916515625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", "199.3927214247347`"}]], "Output",
+ CellChangeTimes->{{3.5116987188125*^9, 3.511698725453125*^9}, 
+   3.5116991209375*^9, 3.51169917075*^9, 3.511699263625*^9, 
+   3.511699302828125*^9, 3.511699418125*^9, 3.51170168896875*^9, {
+   3.51170193028125*^9, 3.511701953796875*^9}, 3.511702151734375*^9, 
+   3.511702369828125*^9, {3.51342739034375*^9, 3.51342740853125*^9}, 
+   3.513427600171875*^9, 3.513427751375*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MaxLDspeed", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"Select", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"a", ",", "x"}], "}"}], "/.", 
+      RowBox[{"Solve", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"a", " ", "\[Equal]", " ", 
+           RowBox[{"D", "[", 
+            RowBox[{
+             RowBox[{"PolarFunction", "[", "x", "]"}], ",", "x"}], "]"}]}], 
+          ",", " ", 
+          RowBox[{
+           RowBox[{"a", " ", "x"}], " ", "\[Equal]", " ", 
+           RowBox[{"PolarFunction", "[", "x", "]"}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"a", ",", "x"}], "}"}]}], "]"}]}], ",", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"#", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "\[GreaterEqual]", "0"}], "&"}]}], 
+    "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ",", "2"}], "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.511700898203125*^9, 3.511700921796875*^9}, {
+  3.5117023533125*^9, 3.511702353796875*^9}}],
+
+Cell[BoxData["53.75182096960872`"], "Output",
+ CellChangeTimes->{
+  3.51170085265625*^9, {3.51170090303125*^9, 3.51170092275*^9}, 
+   3.511701688984375*^9, {3.5117019303125*^9, 3.5117019538125*^9}, 
+   3.51170215175*^9, 3.511702369859375*^9, {3.513427390578125*^9, 
+   3.513427408546875*^9}, 3.513427600203125*^9, 3.513427751390625*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MaxLDSinkRate", " ", "=", " ", 
+  RowBox[{"PolarFunction", "[", "MaxLDspeed", "]"}]}]], "Input",
+ CellChangeTimes->{{3.51170095015625*^9, 3.5117009590625*^9}, {
+   3.511702357453125*^9, 3.511702358125*^9}, 3.513427459109375*^9}],
+
+Cell[BoxData[
+ RowBox[{"-", "217.55276613540718`"}]], "Output",
+ CellChangeTimes->{
+  3.511700961515625*^9, 3.511701689*^9, {3.511701930328125*^9, 
+   3.51170195384375*^9}, 3.511702151765625*^9, 3.511702369875*^9, {
+   3.513427390625*^9, 3.5134274085625*^9}, 3.513427465765625*^9, 
+   3.51342760021875*^9, 3.51342775140625*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MaxLD", " ", "=", " ", 
+  RowBox[{"MaxLDspeed", " ", "*", " ", 
+   RowBox[{"VertSpeedToHorzSpeedConv", " ", "/", " ", 
+    RowBox[{"-", " ", "MaxLDSinkRate", " ", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "the", " ", "101.269", " ", "is", " ", "the", " ", "conv", " ", "from", 
+       " ", "knots", " ", "to", " ", "fpm"}], " ", "*)"}]}]}]}]}]], "Input",
+ CellChangeTimes->{{3.51170103225*^9, 3.51170110653125*^9}, 
+   3.511702109703125*^9, {3.511702360359375*^9, 3.51170236540625*^9}, 
+   3.513427464140625*^9}],
+
+Cell[BoxData["25.021024804544567`"], "Output",
+ CellChangeTimes->{
+  3.511701051359375*^9, 3.511701107*^9, 3.51170168903125*^9, {
+   3.51170193034375*^9, 3.511701953859375*^9}, 3.511702151796875*^9, 
+   3.511702369890625*^9, {3.513427390671875*^9, 3.513427408578125*^9}, 
+   3.5134274671875*^9, 3.513427600234375*^9, 3.513427751421875*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Plot Polar and Data", "Subsection",
+ CellChangeTimes->{{3.511702155625*^9, 3.511702164953125*^9}, {
+  3.5117022145625*^9, 3.511702222375*^9}, {3.5117022591875*^9, 
+  3.51170226446875*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Show", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"PolarData", ",", " ", 
+     RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", 
+     RowBox[{"PlotMarkers", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Automatic", ",", "Medium"}], "}"}]}], ",", " ", 
+     RowBox[{"Frame", "\[Rule]", "True"}], ",", " ", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", 
+        RowBox[{"-", "1000"}]}], "}"}]}], ",", " ", 
+     RowBox[{"PlotLabel", "\[Rule]", " ", "\"\<Glider Polar\>\""}], ",", " ", 
+     RowBox[{"FrameLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<KIAS\>\"", ",", "\"\<FPM in Still Air\>\""}], "}"}]}], 
+     ",", " ", 
+     RowBox[{"GridLines", "\[Rule]", " ", "Automatic"}], ",", " ", 
+     RowBox[{"GridLinesStyle", "\[Rule]", " ", 
+      RowBox[{"Directive", "[", 
+       RowBox[{"Gray", ",", "Dashed"}], "]"}]}]}], "]"}], ",", " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"PolarFunction", "[", "x", "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "MinSinkSpeed", ",", "150"}], "}"}]}], "]"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.511695541328125*^9, 3.51169560890625*^9}, {
+  3.5116956479375*^9, 3.5116956599375*^9}, {3.511695754671875*^9, 
+  3.51169575621875*^9}, {3.51169581065625*^9, 3.5116958295625*^9}, {
+  3.5116962544375*^9, 3.511696258375*^9}, {3.511696344828125*^9, 
+  3.511696405140625*^9}, {3.51169914259375*^9, 3.511699143109375*^9}, {
+  3.511699504890625*^9, 3.511699581828125*^9}, {3.511699689734375*^9, 
+  3.511699690125*^9}, {3.511700581171875*^9, 3.5117006660625*^9}, {
+  3.51170116134375*^9, 3.511701219*^9}, {3.51170197634375*^9, 
+  3.51170199146875*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{
+   GraphicsComplexBox[{{47.793679999999995`, -200.}, {78.20784, -450.}, {
+    73.86296, -400.}, {84.72516, -550.}, {104.27712, -1000.}, {
+    47.793679999999995`, -200.}, {78.20784, -450.}, {73.86296, -400.}, {
+    84.72516, -550.}, {104.27712, -1000.}}, {
+     {RGBColor[1, 0, 0], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 6], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 7], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 8], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 9], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 10]}, {}}], {{}, {}, 
+    {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJwV0Hk4VesXB/ATp5J0m5ThakClga5EIWmFu89AdQylzDbp7EOJFMl0JU6l
+gSKZinuUEqU4ZV5O6JDcDCkUkaKbIS6um8pv//54n/18nr3e77vWUid9bQ7K
+MBiMNPr8/3u2vKkr0YOAJ8fPaMcN8BEqDO2fHCJAsVdN5QrtiYr0hjZvAmpu
+VHYm0c5FJjHlS0BT9rHQTNqelYIytQAC9Kb1xu/TVpW81DcNImAgc/r3StqN
+ki33XEMI+H6lzbeVtvBpquYfEQR4NaH/MG3TKpmUzCgCNFwKdysM8nGsir+o
+SkiAydbHsjq0c6obzn6MJeCuc02cNW2yRn/G7DgCjjb2TJ6krfwsOWhtAgGx
+8QpGt2g3PGN85VwngJFhbtNK+4zU65B3GgH132Ms5If4OFqrty8viwBBqmFB
+KO3suqQXf92h33sv2lRG2/X5T4uRXLo/v+VCxjAf6+vrNuuLCSg/ZYTxtE+/
+0M3ZW0zPN9ae0U3buCFRI7CcgBMlZ530v/Lx9l/kwuIaAqJ15zt/pO3yUirs
+qKP32fUx03yEj4qNGxk/GgiYbK+tzKId2fRtaMdrAqTFReeOj/LR6VV8fXUf
+ARGqRhzzMT4uap007/tC739zsD3Srm11KZH7SveXLDXdOc7HLW/W37WcJCB7
+z4Wk3RN8XNghiWmUYwHbQRx0bZKP0o6106MKLLDqdN+z+T8+hr29eEJxIQtE
+91Wnm2gPvHM4aK/CAjfjgs/LpvhY837U7N06FgwNR3/p/sHHkO79xT91WJDX
+mXou9ScfN/eUb1qpxwKJKso4TvPx5odzKz2MWTAWvDHsA4PCU580fvZzWSDo
+uJuhwaRQd8CmaMybrlfTSDkwl0LFbRGavkdZ8L3P7I2XAoWTZ3MvfA6g61VX
+pgTNoxC15MjOUBaMFsx/eGc+hTyPMnnpJRZk4tNVZooU+rVrOaU8YkGwXvgy
+q+UU7lu3t2bJExbo+nmJM1ZQaBwUqXu5lAUrleRfTa2kUGbpO+aZanrepOg/
+yzQpjLeOzz3ymt6Hv92ZwHUUPpR+/7lzigVqEeZOVQYUJiqtp0qnWWCnN8Ij
+t1IY7GXfvIXJBrR0fM40otCM+fD2hnlssCjwtLY3obB5xyHekhVsGHC0ytQz
+p3BM3JjRb8aGgpm+9hJrCg2ybllcOscG7acz5hP+FJ7oMhOXXWRDUnhh3J4A
+CsUqXVoD8WxYNVw70/kEhVsuKs3lpLAhu09RcjqYQsNAYaPMPTbwTTefZ5ym
+5+MIXE68YIMoMs718VUKYVAnyHkBBwy9WhaollAYoVX3+bwiB1bFpFdklFFY
+6e7lWKzMAW3HWlcdpPtvTTdVUucAqu0M4FVTaF4xf2bjJg4IZxYNVv9FIRE3
+Emdhy4H3h+s0jnyk0NKgMGdDIgfuXT+W8GixADc2vlv2ezIH9MkLhneXCnDB
+4VmXXdI5wCtozBKpCLBFZB8Qd4sD7PG2TtEKAboofjP5V0z//7u/rmmDAI/+
+Y9ogeU2/d5NxvtdCgIn50q8HVLhQv10pp+ukAIN2jZDHlnFB2Sjyyp5QATp+
+VnkVq84FRrkS8TRCgCvVvYsq1nEhyVMyRxwjwDuX50WuNubCy1VL59YmCLDU
+12bxiAMXfPwej4seCrBb562BMJULUdu6BfrDAvyqVJ/87SZ9/1r+Tf9/BMiQ
+KZ32yeKCVYuKVeG/dH5rSq11Hhdih/Nl2QxvdAtzdP4VuRCSy5jIXOiNnQ3t
+UXkfuPCWUO7baOCN7b5tzS3rLeH78G9T6eHe2JLf6qdeZAnCX2d86VL3QYgx
+6GSVWQL/qUd71xofvOd0lXuk0hLG+Evufdjgg1GzbTRLai1h8t7BiQkDH9R3
+ftFi124JD5SL11hxfTBBrmqrcIquD9ObeHDMB/e55v8Y2m4F76PdeZ61Ptim
+EHu2VGIFilFPRvwiDuO2fxRtr/bsApNm5AjNfHGZmXiH9o/dIK4urCvIOIpy
++nOYHjI8GJj7zCH9gR8+UFDfuTuOB1JmevrkpD9285b6FC+1hmL3d1rfLQPQ
+pvZadvR1a5DvI7qrxcfRf7asqZ+WDcTzZbeGkYGomm9Z+TbHBiSjQS+vLTyJ
+fivD0ry22YLG4Cd/6exTKFdlcp4ntYU1oScpFeVQXNv8xqvE0g5m6cte2rcq
+HCduu6RYtNsBV8Nk+E5FBO7qryzb7boXLL7pGhp+/gNth34xChzeC2HZXxxN
+t5/G62v7q6dD9kF8odHbntQoPNSQDnNm2EPBzyu6b8bOYK/RDsVNl+1h33SK
+9fJTMfj3grJXbUv2g76calr9v0LUVXuW3ZO0HwzlpkdYIedw9WBxyxytA7Dq
+1qaCFr1YzFwXO5SfcwCYQU7Tmm8vYMMGlnvQNgdQUOdxk4svoTF58WO61AG0
+ZZuSZzZext+Yj+wJK0dYFBWwY2dpHDZ7V2oodDhC8XPPyKmn8Thtmtth4+YE
++58l7vpdcgW9idW3/utxgsva539d/fQqRi+OqS0/6gxm4vhQsicB11vVtDPH
+neF9jG6/80QihnCHLagoF7iYGZAI65PQvmA8dbe8K7x5OBg7YH0d/W2Es65e
+cIXYTnXtwFPJuNwxsndqnhvw+oIM6mpSUGp23+QIzw3M+kc/LmKmIWeedaVv
+khud1x143zMd/x55slu9yw1+0YjGymc3cE/sfNvF6u7gELrt4PELNzF2Tsfp
+q3x32G9h9OoOJwMvmCRs2JfjDol54lTfHxmYd3bJ22cD7lDWv1MnJD8TbxfJ
+F0k3k9Ac8vyi8sk/0fPGkIL8CRJCA16tcN4qQp/u7N5NgSSsH2aGPTYWYYCm
+R+mBIBJYhbvWLTIVYdTt1953gkmo09xwSGohQtF9rGOHkzB+dkmEoY0Ieyvi
+hTFCEr4EZ6/ROixCz/dbmDNTSLAZriFM/6TzNUY6tFNJwNcr2Jm36HzPnEd2
+aSSkzI1PnHWXzu9f4SG6QcL1vRLVlw/o/K9yEnMRCRJ/G/Qqp/MZHeGRuSQ8
+aNSNyGwT4YBZgv3dPBJ+Hl1uO/edCMei9vzWdJ+EIsfVxwLei5A5p6pT/SEJ
+gYvDk1l9Ily1MHd7pZgENQUyemRMhNq2h5Z8fkxC+yxVidOkCPUT1AcXFJEg
+u+sLVzolQguVxFS3EhIyStrMb8pkoZUjL0BYSoJS78QjhVlZaJcmb/WgjIRJ
+ex2/k3Oy0KmrSvNNOb0vpdBTnxSy0EM9fGq6ggSmxqcm2wVZ+D9MDd33
+      "]]}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{50., 0},
+  Frame->True,
+  FrameLabel->{
+    FormBox["\"KIAS\"", TraditionalForm], 
+    FormBox["\"FPM in Still Air\"", TraditionalForm]},
+  GridLines->Automatic,
+  GridLinesStyle->Directive[
+    GrayLevel[0.5], 
+    Dashing[{Small, Small}]],
+  PlotLabel->FormBox["\"Glider Polar\"", TraditionalForm],
+  PlotRange->{{47.793679999999995`, 104.27712}, {0, -1000}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ CellChangeTimes->{
+  3.511701219625*^9, 3.5117016890625*^9, {3.511701930375*^9, 
+   3.511701953890625*^9}, 3.511701991859375*^9, 3.51170215184375*^9, 
+   3.511702369921875*^9, {3.51342739084375*^9, 3.513427408625*^9}, 
+   3.513427600265625*^9, 3.513427751453125*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["McCready Speed to Fly", "Section",
+ CellChangeTimes->{{3.51169478553125*^9, 3.511694793875*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NoSinkMcCready", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"nextClimb", ",", " ", 
+      RowBox[{"Max", "[", 
+       RowBox[{"MinSinkSpeed", ",", 
+        RowBox[{
+         RowBox[{"Select", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"a", ",", "x"}], "}"}], "/.", 
+            RowBox[{"Solve", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"a", " ", "\[Equal]", " ", 
+                 RowBox[{"D", "[", 
+                  RowBox[{
+                   RowBox[{"PolarFunction", "[", "x", "]"}], ",", "x"}], 
+                  "]"}]}], ",", " ", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"a", " ", "x"}], " ", "+", " ", "nextClimb"}], " ", 
+                 "\[Equal]", " ", 
+                 RowBox[{"PolarFunction", "[", "x", "]"}]}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"a", ",", "x"}], "}"}]}], "]"}]}], ",", " ", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "\[GreaterEqual]", "0"}], 
+            "&"}]}], "]"}], "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "2"}], "]"}], "]"}]}], "]"}]}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"nextClimb", ",", "0", ",", " ", "1000", ",", " ", "250"}], 
+     "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.511701515890625*^9, 3.511701571015625*^9}, {
+  3.511701731359375*^9, 3.51170173475*^9}, {3.511702598921875*^9, 
+  3.51170260978125*^9}, {3.511702696140625*^9, 3.51170270728125*^9}, {
+  3.511703451921875*^9, 3.51170347825*^9}, {3.511704164375*^9, 
+  3.511704165796875*^9}, {3.51170421490625*^9, 3.51170423009375*^9}, {
+  3.51170430125*^9, 3.511704301546875*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "53.75182096960872`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"250", ",", "63.22860248580887`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"500", ",", "71.45945764605271`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"750", ",", "78.8356011065278`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1000", ",", "85.57832620814185`"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.511701571609375*^9, 3.511701689078125*^9, 3.511701735390625*^9, {
+   3.51170193071875*^9, 3.51170195390625*^9}, 3.511702151859375*^9, 
+   3.511702369953125*^9, 3.511702610703125*^9, 3.511702707984375*^9, 
+   3.511703480390625*^9, 3.51170416746875*^9, 3.511704231421875*^9, 
+   3.51170430225*^9, 3.511707418421875*^9, 3.511707476578125*^9, {
+   3.51342739128125*^9, 3.51342740865625*^9}, 3.513427600296875*^9, 
+   3.513427751484375*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"{", "NoSinkMcCready", "}"}], ",", " ", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"{", "Red", "}"}]}], ",", 
+   RowBox[{"PlotMarkers", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Automatic", ",", "Medium"}], "}"}]}], ",", " ", 
+   RowBox[{"Frame", "\[Rule]", "True"}], ",", " ", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"40", ",", "100"}], "}"}]}], ",", 
+   RowBox[{"PlotLabel", "\[Rule]", " ", "\"\<Speed To Fly\>\""}], ",", " ", 
+   RowBox[{"FrameLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<FPM in Next Thermal\>\"", ",", "\"\<KIAS\>\""}], "}"}]}], 
+   ",", " ", 
+   RowBox[{"FrameTicks", " ", "\[Rule]", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{"i", ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "0", ",", "1000", ",", "250"}], "}"}]}], "]"}], 
+      ",", "Automatic"}], "}"}]}], ",", 
+   RowBox[{"GridLines", "\[Rule]", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{"i", ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "0", ",", "1000", ",", "250"}], "}"}]}], "]"}], 
+      ",", "Automatic"}], "}"}]}], ",", " ", 
+   RowBox[{"GridLinesStyle", "\[Rule]", " ", 
+    RowBox[{"Directive", "[", 
+     RowBox[{"Gray", ",", "Dashed"}], "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.511702612515625*^9, 3.511702651953125*^9}, {
+  3.511702727453125*^9, 3.51170273190625*^9}, {3.51170312578125*^9, 
+  3.511703192890625*^9}, {3.51170348915625*^9, 3.5117035056875*^9}, {
+  3.511703549703125*^9, 3.511703708796875*^9}, {3.511707271828125*^9, 
+  3.51170728496875*^9}, {3.51170739834375*^9, 3.511707412515625*^9}, {
+  3.51170747071875*^9, 3.511707474109375*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[
+  GraphicsComplexBox[{{0., 53.75182096960872}, {250., 63.22860248580887}, {
+   500., 71.45945764605271}, {750., 78.8356011065278}, {1000., 
+   85.57832620814185}}, {{{}, {}, 
+     {RGBColor[1, 0, 0], LineBox[{1, 2, 3, 4, 5}]}}, {
+     {RGBColor[1, 0, 0], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 2], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 3], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 4], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->Medium], 5]}, {}}}],
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 40.},
+  Frame->True,
+  FrameLabel->{
+    FormBox["\"FPM in Next Thermal\"", TraditionalForm], 
+    FormBox["\"KIAS\"", TraditionalForm]},
+  FrameTicks->{{{0, 
+      FormBox["0", TraditionalForm]}, {250, 
+      FormBox["250", TraditionalForm]}, {500, 
+      FormBox["500", TraditionalForm]}, {750, 
+      FormBox["750", TraditionalForm]}, {1000, 
+      FormBox["1000", TraditionalForm]}}, Automatic},
+  GridLines->{{0, 250, 500, 750, 1000}, Automatic},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5], 
+    Dashing[{Small, Small}]],
+  PlotLabel->FormBox["\"Speed To Fly\"", TraditionalForm],
+  PlotRange->{{0., 1000.}, {40, 100}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ CellChangeTimes->{
+  3.51170728621875*^9, 3.51170734221875*^9, 3.51170741853125*^9, 
+   3.5117074790625*^9, {3.513427391359375*^9, 3.5134274086875*^9}, 
+   3.513427600328125*^9, 3.513427751515625*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell["Draw Selector Ring", "Section",
+ CellChangeTimes->{{3.5116948291875*^9, 3.511694851078125*^9}}]
+}, Open  ]]
+},
+WindowSize->{899, 1071},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 157, 2, 83, "Title"],
+Cell[727, 26, 104, 1, 28, "Subsubtitle"],
+Cell[834, 29, 130, 4, 47, "Text"],
+Cell[967, 35, 175, 4, 31, "Input"],
+Cell[CellGroupData[{
+Cell[1167, 43, 97, 1, 71, "Section"],
+Cell[CellGroupData[{
+Cell[1289, 48, 107, 1, 36, "Subsection"],
+Cell[1399, 51, 1908, 43, 152, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3344, 99, 144, 2, 36, "Subsection"],
+Cell[3491, 103, 442, 12, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3970, 120, 142, 2, 36, "Subsection"],
+Cell[CellGroupData[{
+Cell[4137, 126, 659, 16, 31, "Input"],
+Cell[4799, 144, 426, 6, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5262, 155, 320, 5, 31, "Input"],
+Cell[5585, 162, 439, 7, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6061, 174, 1029, 30, 52, "Input"],
+Cell[7093, 206, 336, 5, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7466, 216, 252, 4, 31, "Input"],
+Cell[7721, 222, 327, 6, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8085, 233, 541, 11, 52, "Input"],
+Cell[8629, 246, 339, 5, 30, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9017, 257, 194, 3, 36, "Subsection"],
+Cell[CellGroupData[{
+Cell[9236, 264, 1775, 38, 132, "Input"],
+Cell[11014, 304, 5061, 98, 262, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16136, 409, 102, 1, 71, "Section"],
+Cell[CellGroupData[{
+Cell[16263, 414, 1843, 45, 132, "Input"],
+Cell[18109, 461, 901, 20, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19047, 486, 1761, 42, 92, "Input"],
+Cell[20811, 530, 1871, 47, 276, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[22709, 581, 101, 1, 71, "Section"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
